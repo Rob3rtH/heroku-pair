@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/static", express.static('public'));
 
+app.set('port', (process.env.PORT || 5000));
 app.set('view engine', 'pug');
 
 const mainRoutes = require('./routes');
@@ -28,6 +29,6 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-app.listen(3000, () => {
-  console.log('The application is running on localhost:3000');
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
